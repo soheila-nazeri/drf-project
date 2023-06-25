@@ -1,0 +1,16 @@
+
+    {% for article in object_list%}
+    <article>
+        <h2>{{article.title}}</h2>
+        <div>{{article.slug}}</div>
+        <p>{{article.author}}</p>
+        <p>{{article.content}}</p>
+        <p>{{article.publish}}</p>
+        <p>{{article.created}}</p>
+        <p>{{article.updated}}</p>
+        <p>{{article.status}}</p>
+        <br>
+        <hr>
+    </article>
+    {% empty %}
+{% endfor %}
