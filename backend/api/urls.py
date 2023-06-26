@@ -2,7 +2,7 @@
 from django.urls import path,include
 from .views import ArticleList,ArticleListCreate,ArticleRetrieveApiView,ArticleDestroyApiView
 from .views import ArticleRetrieveDestroyAPIView,ArticleRetrieveUpdateAPIView,ArticleRetrieveUpdateDestroyAPIView
-
+from .views import UserList,UserRetrieveUpdateDestroyAPIView
 app_name='api'
 urlpatterns = [
     path('',ArticleList.as_view(),name='list'),
@@ -12,6 +12,10 @@ urlpatterns = [
     # path('<int:pk>/',ArticleRetrieveDestroyAPIView.as_view(),name='article-retrieve-desctroy'),
     # path('<int:pk>/',ArticleRetrieveUpdateAPIView.as_view(),name='article-retrieve-update'),
     path('<int:pk>/',ArticleRetrieveUpdateDestroyAPIView.as_view(),name='article-retrieve-desctroy-desctroy'),
+    
+    
+    path('users/',UserList.as_view(),name='user-list'),
+    path('users/<int:pk>/',UserRetrieveUpdateDestroyAPIView.as_view(),name='user-detail'),
     
 
 
