@@ -15,4 +15,6 @@ class ArticleList(ListView):
 class ArticleDetail(DetailView):
     def get_object(self):
        queryset = Article.objects.filter(status=True)
-       return get_object_or_404(queryset, pk=self.kwargs.get("pk"))
+    #    return get_object_or_404(queryset, pk=self.kwargs.get("pk"))
+       return get_object_or_404(queryset, slug=self.kwargs.get("slug"))
+   

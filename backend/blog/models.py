@@ -4,7 +4,7 @@ from django.utils import timezone
 # Create your models here.
 class Article(models.Model):
     title=models.CharField(max_length=250)
-    slug=models.SlugField()
+    slug=models.SlugField(unique=True)
     author=models.ForeignKey(User,on_delete=models.CASCADE)
     content=models.TextField()
     publish=models.DateTimeField(default=timezone.now)
