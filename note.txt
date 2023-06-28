@@ -1,0 +1,21 @@
+curl  get http://127.0.0.1:8000/api/  | python -m json.tool
+curl in c:\curl\bin
+set to path 
+
+know about postman curl httpie and another things ...
+about knox jwt , ...
+
+
+X-CSRFToken
+
+
+curl -X POST -H "Content-Type: application/json" -H "X-CSRFToken: XCaQFS0WEeDjlo6Le7Eq9MY882JNYlVS" -d '{"title":"Your Title","slug":"your-slug","author":1,"content":"Your content"}' http://127.0.0.1:8000/api/listCreate/
+curl -X POST -H "Content-Type: application/json" -H "X-CSRFToken: 4wGc4r0VOSGQXuzpQv6fHXJtHJplDzlz" -d '{"title":"Your Title","slug":"your-slug","author":1,"content":"Your content"}' http://127.0.0.1:8000/api/listCreate/
+
+
+python manage.py drf_create_token soli 
+
+
+RESTer : 
+Authorization Token 0c48088a820dddfb13bf78bf78a173428215c73b
+and method get and url in http://127.0.0.1:8000/api/users

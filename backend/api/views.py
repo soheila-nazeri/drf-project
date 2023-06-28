@@ -7,7 +7,7 @@ from rest_framework.generics import (
     RetrieveUpdateAPIView,
     RetrieveUpdateDestroyAPIView,
 )
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAdminUser,IsAuthenticated
 from blog.models import Article
 from .serializers import ArticleSerializer, UserSerializer
 from .permissions import (
@@ -16,17 +16,23 @@ from .permissions import (
     IsStaffOrReadOnly,
     IsSuperUserOrStaffReadonly)
 
+from rest_framework.views import APIView
+from rest_framework.response import Response
 # Create your views here.
 
 
-class ArticleList(ListAPIView):
+# class ArticleList(ListAPIView):
+#     queryset = Article.objects.all()
+#     serializer_class = ArticleSerializer
+
+class ArticleList(ListCreateAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
 
 
-class ArticleListCreate(ListCreateAPIView):
-    queryset = Article.objects.all()
-    serializer_class = ArticleSerializer
+# class ArticleListCreate(ListCreateAPIView):
+#     queryset = Article.objects.all()
+#     serializer_class = ArticleSerializer
     
 
 class ArticleListCreateslug(ListCreateAPIView):
@@ -69,10 +75,18 @@ class ArticleRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
 class UserList(ListCreateAPIView):
     # permission_classes=(IsAdminUser,)
     # permission_classes=(IsSuperUser,IsStaffOrReadOnly)
-    permission_classes=(IsSuperUserOrStaffReadonly,)
+    def get_queryset(self):
+        print('----------------------')
+        print(self.request.user)
+        print(self.request.path)
+        print(self.request.session)
+        print(self.request.auth)
+        print(self.request.method)
+        print('----------------------')
+        return  User.objects.all()
     
-    queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes=(IsSuperUserOrStaffReadonly,)
 
 
 # ===detail
@@ -83,3 +97,20 @@ class UserRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+
+class RevoeToken(APIView):
+    permission_classes=(IsAuthenticated,)
+    
+    # def get(self,request):
+    #     return Response("this is Method get" )
+
+    # def post(self,request):
+    #     return Response("this is Method post" )
+    
+    # def put(self,request):
+    #     return Response("this is Method put" )
+    
+    def delete(self,request):
+        request.auth.delete()
+        return Response("token delete" ,status=204)

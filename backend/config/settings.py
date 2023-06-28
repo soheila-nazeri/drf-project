@@ -38,8 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
     'blog.apps.BlogConfig',
     'api.apps.ApiConfig',
+    
     
 ]
 
@@ -136,5 +138,24 @@ REST_FRAMEWORK = {
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'api.permissions.IsStaffOrReadOnly',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        # 'rest_framework.authentication.BasicAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
     ]
 }
+
+# settings.py
+
+# For django-cors-headers
+CORS_ORIGIN_WHITELIST = [
+    'chrome-extension://eejfoncpjfgmeleakejdcanedmefagga',
+    # Other origins...
+]
+
+# For Django's built-in CSRF protection
+CSRF_TRUSTED_ORIGINS = [
+    'chrome-extension://eejfoncpjfgmeleakejdcanedmefagga',
+    # Other origins...
+]
